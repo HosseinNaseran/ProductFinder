@@ -62,29 +62,27 @@ let searchId = (onchange = (e) => {
   }
 });
 
-fetch("https://jsonplaceholder.typicode.com/posts")
+/*fetch("https://jsonplaceholder.typicode.com/posts")
   .then((response) => response.json())
   .then((data) => {
     product = data;
     console.log(product);
-  });
+  });*/
 
 function submit() {
   document.getElementById("result").style.display = "flex";
 
-  /* if (searchId=product) {
-        alert(product)
-        }
-        
-        */
-
-  var filteredproduct = product.filter((product) =>
-    searchId.includes(product.id)
-  );
-  if (filteredproduct.length > 0) {
-    document.getElementById("result").innerHTML =
-      JSON.stringify(filteredproduct);
-  } else {
-    alert("محصول مورد نطر پیدا نشد");
-  }
+  fetch(`https://jsonplaceholder.typicode.com/posts/${searchId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("محصول مورد نظر پیدا نشد");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      document.getElementById("result").innerHTML = JSON.stringify(data);
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
 }
