@@ -1,99 +1,90 @@
-let searchId = document.querySelector("input");
+/*
+var searchId = document.querySelector("input");
 searchId.addEventListener("change", function () {
-    searchId.value = searchId.value + " - "
-
-})
-
-
+  let text = searchId.value;
+  var past = text.split("-");
+  searchId.value = past + "-";
+});
 
 function submit() {
-    let input = document.querySelector("input").value;
-    if (!input) {
-        alert("لطفا یک ایدی تایپ کنید");
-        
+  let input = document.querySelector("input").value;
+  if (!input) {
+    alert("لطفا یک ایدی تایپ کنید");
+
     return;
-    }
-    
+  }
 }
 
-/*let search = document.querySelector("button");
-search.addEventListener("click", function submit() {
-    
-fetch('https://jsonplaceholder.typicode.com/posts')
-.then((response) => response.json())
-.then(posts => {
-    if (posts.id == parseInt(product.value)) {
-        alert(posts)
-        
+// let enteredIds = []
+let products = fetch("https://jsonplaceholder.typicode.com/posts")
+  .then((response) => response.json())
+  .then((data) => {
+    products = data;
+  });
+
+searchId.addEventListener("change", function () {
+  let enteredvalue = parseInt();
+  if (Number(enteredvalue)) {
+    enteredIds.push(enteredvalue);
+  } else {
+    alert("لطفا عین آدم عدد وارد کنید");
+  }
+});
+
+let searched = document.querySelector("button");
+searched.addEventListener("click", function submit() {
+  document.getElementById("result").style.display = "flex";
+
+  var filteredproduct = products.filter((product) =>
+    searchId.includes(product.id)
+  );
+
+  let mainproduct = filteredproduct.map((product) => (product = { product }));
+
+  if (mainproduct.length > 0) {
+    //  console.log(filteredproduct)
+    document.getElementById("result").innerHTML = JSON.stringify(mainproduct);
+  } else {
+    alert("محصول مورد نطر پیدا نشد");
+  }
+});
+*/
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+let searchId = (onchange = (e) => {
+  if (!isNaN == e.target.value) {
+    alert("لطفا چیزی وارد کنید");
+  } else if (!Number(e.target.value)) {
+    alert("لطفا عین آدم عدد وارد کنید");
+  } else {
+    searchId = e.target.value;
+  }
+});
+
+fetch("https://jsonplaceholder.typicode.com/posts")
+  .then((response) => response.json())
+  .then((data) => {
+    product = data;
+    console.log(product);
+  });
+
+function submit() {
+  document.getElementById("result").style.display = "flex";
+
+  /* if (searchId=product) {
+        alert(product)
         }
-        else{
-            alert("محصول مورد نظر یافت نشد")
-    }
-    
-    }
-    )
-    }
-    )*/
-   let enteredIds = []
-   let products = []
+        
+        */
 
-   fetch("https://jsonplaceholder.typicode.com/posts")
-   .then(response => response.json())
-   .then(data => {
-       products = data;
-    })
-    
-    
-    searchId.addEventListener("change", function () {
-        let enteredvalue = parseInt(searchId.value)
-        if (Number(enteredvalue)) {
-            enteredIds.push(enteredvalue)
-            
-        }
-        else {
-            alert("لطفا عین آدم عدد وارد کنید")
-        }
-        
-    })
-    
-    
-    
-    
-    let searched = document.querySelector("button");
-    searched.addEventListener("click", function submit(){
-        document.getElementById("result").style.display="flex"
-        
-        
-        
-        let filteredproduct =
-            products.filter((product) => enteredIds.includes(product.id))
-            
-        
-      /*  let mainproduct = 
-            
-            filteredproduct.map((product) => product = {product} )*/
-        
-        
-        
-        
-        
-        
-        if (filteredproduct.length > 0) {
-            
-            
-            //  console.log(filteredproduct)
-            document.getElementById("result")
-            .innerHTML= JSON.stringify(filteredproduct)
-
-            
-        
-
-    }
-    else {
-        alert("محصول مورد نطر پیدا نشد")
-    }
-
-})
-
-
-
+  var filteredproduct = product.filter((product) =>
+    searchId.includes(product.id)
+  );
+  if (filteredproduct.length > 0) {
+    document.getElementById("result").innerHTML =
+      JSON.stringify(filteredproduct);
+  } else {
+    alert("محصول مورد نطر پیدا نشد");
+  }
+}
