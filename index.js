@@ -19,38 +19,34 @@ function submit() {
       return response.json();
     })
     .then((data) => {
-      /////////////////////////////////////////////////////////////////////////////
-      /*
-     document.getElementById("result").innerHTML = JSON.stringify(data);
-       const keys = Object.keys(data);
-      
-    console.log(keys);
-  
-   
-        let tableTh= document.getElementsByTagName("table");
-        tableTh.innerHtml = "<tr>" + keys.map(key=>`<th>${keys}</th>`).join("") + "</tr>";
-       
      
-  
-  
-   document.getElementsByClassName("name").innerHTML =JSON.stringify(`${keys.id}`);
-  document.getElementsByTagName("table").innerHTML = `<tr><td>${searchId.id}</td><td>${searchId.title}</td><td>${searchId.body}</td></tr>`;*/
-      ///////////////////////////////////////////////////////////////////////////////////////////////
 
       const keys = Object.keys(data);
-
-      const tableHead = document.getElementById("th");
+//////////////////////////////////////////////////////////////////////////////////////////////
+    /* const tableHead = document.getElementById("name");
       tableHead.innerHTML = "<th>" + keys + "</th>";
 
       const tableBody = document.getElementById("td");
       // tableBody.innerHTML = "<tr>" + "<td>"+ JSON.stringify(data)+"</td>" + "</tr>";
       //  tableBody.innerHTML = "<td>"+keys.map(value=> data[value]) +"</td>"
       tableBody.innerHTML = keys.map((value) => `<td>${data[value]}</td>`);
+      */
+ /////////////////////////////////////////////////////////////////////////////////////////////
 
-      // let {id , title , body} = keys;
-      // let goods = id;
-      // console.log(goods);
-    })
+
+      let tableHead = document.getElementById("name");
+      tableHead.innerHTML =
+       "<th>" + keys[0] + "</th>" + 
+       "<th>" + keys[1] + "</th>" +
+       "<th>" + keys[2] + "</th>" +
+       "<th>" + keys[3] + "</th>"
+       let tableBody = document.getElementById("body");
+       tableBody.innerHTML = 
+       "<td>"+keys.map(value=> data[value])[0] +"</td>" + 
+       "<td>"+keys.map(value=> data[value])[1] +"</td>" +
+       "<td>"+keys.map(value=> data[value])[2] +"</td>" +
+       "<td>"+keys.map(value=> data[value])[3] +"</td>"
+      })
 
     .catch((error) => {
       alert(error.message);
