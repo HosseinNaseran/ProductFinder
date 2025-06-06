@@ -1,57 +1,3 @@
-/*
-var searchId = document.querySelector("input");
-searchId.addEventListener("change", function () {
-  let text = searchId.value;
-  var past = text.split("-");
-  searchId.value = past + "-";
-});
-
-function submit() {
-  let input = document.querySelector("input").value;
-  if (!input) {
-    alert("لطفا یک ایدی تایپ کنید");
-
-    return;
-  }
-}
-
-// let enteredIds = []
-let products = fetch("https://jsonplaceholder.typicode.com/posts")
-  .then((response) => response.json())
-  .then((data) => {
-    products = data;
-  });
-
-searchId.addEventListener("change", function () {
-  let enteredvalue = parseInt();
-  if (Number(enteredvalue)) {
-    enteredIds.push(enteredvalue);
-  } else {
-    alert("لطفا عین آدم عدد وارد کنید");
-  }
-});
-
-let searched = document.querySelector("button");
-searched.addEventListener("click", function submit() {
-  document.getElementById("result").style.display = "flex";
-
-  var filteredproduct = products.filter((product) =>
-    searchId.includes(product.id)
-  );
-
-  let mainproduct = filteredproduct.map((product) => (product = { product }));
-
-  if (mainproduct.length > 0) {
-    //  console.log(filteredproduct)
-    document.getElementById("result").innerHTML = JSON.stringify(mainproduct);
-  } else {
-    alert("محصول مورد نطر پیدا نشد");
-  }
-});
-*/
-
-///////////////////////////////////////////////////////////////////////////////////////
-
 let searchId = (onchange = (e) => {
   if (!isNaN == e.target.value) {
     alert("لطفا چیزی وارد کنید");
@@ -62,15 +8,8 @@ let searchId = (onchange = (e) => {
   }
 });
 
-/*fetch("https://jsonplaceholder.typicode.com/posts")
-  .then((response) => response.json())
-  .then((data) => {
-    product = data;
-    console.log(product);
-  });*/
-
 function submit() {
-  document.getElementById("result").style.display = "flex";
+  document.getElementById("result").style.display = "table";
 
   fetch(`https://jsonplaceholder.typicode.com/posts/${searchId}`)
     .then((response) => {
@@ -80,8 +19,39 @@ function submit() {
       return response.json();
     })
     .then((data) => {
-      document.getElementById("result").innerHTML = JSON.stringify(data);
+      /////////////////////////////////////////////////////////////////////////////
+      /*
+     document.getElementById("result").innerHTML = JSON.stringify(data);
+       const keys = Object.keys(data);
+      
+    console.log(keys);
+  
+   
+        let tableTh= document.getElementsByTagName("table");
+        tableTh.innerHtml = "<tr>" + keys.map(key=>`<th>${keys}</th>`).join("") + "</tr>";
+       
+     
+  
+  
+   document.getElementsByClassName("name").innerHTML =JSON.stringify(`${keys.id}`);
+  document.getElementsByTagName("table").innerHTML = `<tr><td>${searchId.id}</td><td>${searchId.title}</td><td>${searchId.body}</td></tr>`;*/
+      ///////////////////////////////////////////////////////////////////////////////////////////////
+
+      const keys = Object.keys(data);
+
+      const tableHead = document.getElementById("th");
+      tableHead.innerHTML = "<th>" + keys + "</th>";
+
+      const tableBody = document.getElementById("td");
+      // tableBody.innerHTML = "<tr>" + "<td>"+ JSON.stringify(data)+"</td>" + "</tr>";
+      //  tableBody.innerHTML = "<td>"+keys.map(value=> data[value]) +"</td>"
+      tableBody.innerHTML = keys.map((value) => `<td>${data[value]}</td>`);
+
+      // let {id , title , body} = keys;
+      // let goods = id;
+      // console.log(goods);
     })
+
     .catch((error) => {
       alert(error.message);
     });
